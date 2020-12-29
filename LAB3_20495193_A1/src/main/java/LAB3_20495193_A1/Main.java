@@ -5,6 +5,8 @@
  */
 package LAB3_20495193_A1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Admin
@@ -16,6 +18,12 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    }
+        System.out.println("1. Agregar nueva pregunta\n" +
+                           "2. Responder pregunta\n" +
+                           "3. Dar recompensa\n" +
+                           "4. Aceptar respuesta\n" +
+                           "5. Cerrar sesion\n" +
+                           "6. Salir del programa");
+                        }
     
 }

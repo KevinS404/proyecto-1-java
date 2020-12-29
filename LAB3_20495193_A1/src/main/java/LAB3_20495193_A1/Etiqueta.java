@@ -10,5 +10,6 @@ package LAB3_20495193_A1;
  * @author Admin
  */
 public class Etiqueta {
-    
+    private String nombre;
+    private String descripcion;
 }

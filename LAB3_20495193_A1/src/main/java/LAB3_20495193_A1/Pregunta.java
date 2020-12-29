@@ -10,5 +10,12 @@ package LAB3_20495193_A1;
  * @author Admin
  */
 public class Pregunta {
-    
+    int iD;
+    int respuestas;
+    String etiquetas[];
+    String titulo;
+    String fechaDePublicacion;
+    String autor;
+    String estado;
+    int recompensa;
 }

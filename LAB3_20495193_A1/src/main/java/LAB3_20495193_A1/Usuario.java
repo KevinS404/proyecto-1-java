@@ -5,10 +5,16 @@
  */
 package LAB3_20495193_A1;
 
-/**
- *
- * @author Admin
- */
+
 public class Usuario {
+    private String nombre;
+    private String contrasena;
+    private int reputacion;
     
+    public void IniciarSesion(){
+        
+    }
+    public void CerrarSesion(){
+        
+    }
 }
