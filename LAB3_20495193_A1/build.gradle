@@ -4,7 +4,9 @@ apply plugin: 'application'
 
 
 mainClassName = 'LAB3_20495193_A1.Main'
-
+run{
+    standardInput = System.in
+}
 repositories {
     jcenter()
 }
@@ -12,3 +14,4 @@ repositories {
 dependencies {
     testImplementation     'junit:junit:4.13'
 }
+

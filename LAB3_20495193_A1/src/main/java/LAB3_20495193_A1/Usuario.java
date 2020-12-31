@@ -11,10 +11,32 @@ public class Usuario {
     private String contrasena;
     private int reputacion;
     
-    public void IniciarSesion(){
+    public Usuario(String nombre, String contrasena) {
+        this.nombre = nombre;
+        this.contrasena = contrasena;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    public void Login(String Nombre,String Usuario){
+        
         
     }
-    public void CerrarSesion(){
+    public void logout(String Nombre,String Usuario){
         
     }
 }

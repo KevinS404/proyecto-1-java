@@ -17,13 +17,16 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("1. Agregar nueva pregunta\n" +
+        System.out.println("Escoja su opcion: \n" +
+                           "1. Agregar nueva pregunta\n" +
                            "2. Responder pregunta\n" +
                            "3. Dar recompensa\n" +
                            "4. Aceptar respuesta\n" +
                            "5. Cerrar sesion\n" +
                            "6. Salir del programa");
+        Scanner opcion = new Scanner(System.in);
+        System.out.println("INTRODUZCA SU OPCION: ");
+        int opcion1 = opcion.nextInt();
                         }
     
 }
