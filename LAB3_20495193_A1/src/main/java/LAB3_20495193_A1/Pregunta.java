@@ -5,13 +5,15 @@
  */
 package LAB3_20495193_A1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Admin
  */
 public class Pregunta {
-    private int iD;
-    private int respuestas;
+    static private int idPregunta;
+    static private int respuestas;
     private String etiquetas[];
     private String titulo;
     private String fechaDePublicacion;
@@ -19,9 +21,9 @@ public class Pregunta {
     private String estado;
     private int recompensa;
 
-    public Pregunta(int iD, int respuestas, String[] etiquetas, String titulo, String autor, String estado, int recompensa) {
-        this.iD = iD;
-        this.respuestas = respuestas;
+    public Pregunta(int idPregunta, int respuestas, String[] etiquetas, String titulo, String autor, String estado, int recompensa) {
+        Pregunta.idPregunta = idPregunta + 1;
+        Pregunta.respuestas = 0;
         this.etiquetas = etiquetas;
         this.titulo = titulo;
         this.autor = autor;
@@ -29,12 +31,13 @@ public class Pregunta {
         this.recompensa = recompensa;
     }
 
-    public int getiD() {
-        return iD;
+
+    public int getidPregunta() {
+        return idPregunta;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setidPregunta(int idPregunta) {
+        Pregunta.idPregunta = idPregunta;
     }
 
     public int getRespuestas() {
@@ -94,7 +97,12 @@ public class Pregunta {
     }
     
     
-    public void ask(String titulo,String contenido,String etiquetas[]){
+    public void ask(){
+        //Pregunta 
+        
+        
+    }
+    public void reward(){
         
     }
    

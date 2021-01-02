@@ -10,24 +10,24 @@ package LAB3_20495193_A1;
  * @author Admin
  */
 public class Respuesta {
-    int iD;
+    static int idRespuesta;
     String autor;
     String fecha;
     String contenido;
 
-    public Respuesta(int iD, String autor, String fecha, String contenido) {
-        this.iD = iD;
+    public Respuesta(int idRespuesta, String autor, String fecha, String contenido) {
+        Respuesta.idRespuesta = idRespuesta + 1;
         this.autor = autor;
         this.fecha = fecha;
         this.contenido = contenido;
     }
 
-    public int getiD() {
-        return iD;
+    public int getidRespuesta() {
+        return idRespuesta;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setidRespuesta(int idRespuesta) {
+        Respuesta.idRespuesta = idRespuesta;
     }
 
     public String getAutor() {
@@ -52,6 +52,12 @@ public class Respuesta {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+    public void answer(){
+        
+    }
+    public void accept(){
+        
     }
     
     
