@@ -7,12 +7,32 @@ package LAB3_20495193_A1;
 
 
 public class Stack {
+    String usuarios[];
+    String contrasenas[];
     String preguntas[];
     String respuestas[];
 
-    public Stack(String[] preguntas, String[] respuestas) {
+    public Stack(String[] usuarios, String[] contrasenas, String[] preguntas, String[] respuestas) {
+        this.usuarios = usuarios;
+        this.contrasenas = contrasenas;
         this.preguntas = preguntas;
         this.respuestas = respuestas;
+    }
+
+    public String[] getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(String[] usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public String[] getContrasenas() {
+        return contrasenas;
+    }
+
+    public void setContrasenas(String[] contrasenas) {
+        this.contrasenas = contrasenas;
     }
 
     public String[] getPreguntas() {
@@ -31,5 +51,7 @@ public class Stack {
         this.respuestas = respuestas;
     }
     
-}
+    
+   
 
+}

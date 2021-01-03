@@ -6,14 +6,14 @@
 package LAB3_20495193_A1;
 
 import java.util.Scanner;
-
+import java.util.Arrays;
 
 public class Main {
-    
-    Usuario usuario1 = new Usuario("kevin", "polar12");
-    Usuario usuario2 = new Usuario("kevin", "polar12");
-    Usuario usuario3 = new Usuario("kevin", "polar12");
-    Usuario usuario4 = new Usuario("kevin", "polar12");
+  
+    Usuario usuario1 = new Usuario("usuario1", "polar9");
+    Usuario usuario2 = new Usuario("usuario2", "polar10");
+    Usuario usuario3 = new Usuario("usuario3", "polar11");
+    Usuario usuario4 = new Usuario("usuario4", "polar12");
     
     
     
@@ -21,6 +21,7 @@ public class Main {
         System.out.println("Bienvenido\n"
                         + "1. Login\n"
                         + "2. Register\n");
+        //login()
         int primeraOpcion;
         Scanner opcion1 = new Scanner(System.in);
         System.out.println("INTRODUZCA SU OPCION:");

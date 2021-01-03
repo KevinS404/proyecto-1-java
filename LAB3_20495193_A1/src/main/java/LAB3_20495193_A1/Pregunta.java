@@ -7,10 +7,7 @@ package LAB3_20495193_A1;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Admin
- */
+
 public class Pregunta {
     static private int idPregunta;
     static private int respuestas;
