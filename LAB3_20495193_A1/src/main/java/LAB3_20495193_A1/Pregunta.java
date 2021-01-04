@@ -1,26 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package LAB3_20495193_A1;
 
 import java.util.Scanner;
 
-
-public class Pregunta {
-    static private int idPregunta;
-    static private int respuestas;
+//se genera la clase Pregunta que hereda la clase Stack
+public class Pregunta extends Stack{
+    static private int idPregunta = 0;
+    static private int cantidadRespuestas;
     private String etiquetas[];
     private String titulo;
     private String fechaDePublicacion;
     private String autor;
     private String estado;
     private int recompensa;
-
+    //cosntructor
     public Pregunta(int idPregunta, int respuestas, String[] etiquetas, String titulo, String autor, String estado, int recompensa) {
         Pregunta.idPregunta = idPregunta + 1;
-        Pregunta.respuestas = 0;
+        Pregunta.cantidadRespuestas = 0;
         this.etiquetas = etiquetas;
         this.titulo = titulo;
         this.autor = autor;
@@ -28,7 +24,7 @@ public class Pregunta {
         this.recompensa = recompensa;
     }
 
-
+    //getters y setters para la clase Pregunta
     public int getidPregunta() {
         return idPregunta;
     }
@@ -37,12 +33,13 @@ public class Pregunta {
         Pregunta.idPregunta = idPregunta;
     }
 
-    public int getRespuestas() {
-        return respuestas;
+    
+    public int getCantidadRespuestas() {
+        return cantidadRespuestas;
     }
 
-    public void setRespuestas(int respuestas) {
-        this.respuestas = respuestas;
+    public void setCantidadRespuestas(int cantidadRespuestas) {
+        Pregunta.cantidadRespuestas = cantidadRespuestas;
     }
 
     public String[] getEtiquetas() {

@@ -1,27 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package LAB3_20495193_A1;
 
-/**
- *
- * @author Admin
- */
-public class Respuesta {
-    static int idRespuesta;
+//se genera una clase Respuesta con sus atributos fundamentales que tambien hereda 
+//la clase stack
+public class Respuesta extends Stack {
+    static int idRespuesta = 0;
     String autor;
     String fecha;
     String contenido;
-
+    //constructor
     public Respuesta(int idRespuesta, String autor, String fecha, String contenido) {
         Respuesta.idRespuesta = idRespuesta + 1;
         this.autor = autor;
         this.fecha = fecha;
         this.contenido = contenido;
     }
-
+    //getters y setters de la clase Respuesta
     public int getidRespuesta() {
         return idRespuesta;
     }

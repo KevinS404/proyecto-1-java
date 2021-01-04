@@ -1,57 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package LAB3_20495193_A1;
+import java.util.ArrayList;
 
-
+//se genera la clase Stack que sera el nucleo de todos los datos del programa
 public class Stack {
-    String usuarios[];
-    String contrasenas[];
-    String preguntas[];
-    String respuestas[];
-
-    public Stack(String[] usuarios, String[] contrasenas, String[] preguntas, String[] respuestas) {
-        this.usuarios = usuarios;
-        this.contrasenas = contrasenas;
-        this.preguntas = preguntas;
-        this.respuestas = respuestas;
+    ArrayList<String> usuarios = new ArrayList<>();
+    ArrayList<String> contrasenas = new ArrayList<>();
+    ArrayList<String> preguntas= new ArrayList<>();
+    ArrayList<String> respuestas = new ArrayList<>();
+    //constructor
+    public Stack() {
     }
-
-    public String[] getUsuarios() {
+    //getters y setters de la clase Stack
+    public ArrayList<String> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(String[] usuarios) {
+    public void setUsuarios(ArrayList<String> usuarios) {
         this.usuarios = usuarios;
     }
 
-    public String[] getContrasenas() {
+    public ArrayList<String> getContrasenas() {
         return contrasenas;
     }
 
-    public void setContrasenas(String[] contrasenas) {
+    public void setContrasenas(ArrayList<String> contrasenas) {
         this.contrasenas = contrasenas;
     }
 
-    public String[] getPreguntas() {
+    public ArrayList<String> getPreguntas() {
         return preguntas;
     }
 
-    public void setPreguntas(String[] preguntas) {
+    public void setPreguntas(ArrayList<String> preguntas) {
         this.preguntas = preguntas;
     }
 
-    public String[] getRespuestas() {
+    public ArrayList<String> getRespuestas() {
         return respuestas;
     }
 
-    public void setRespuestas(String[] respuestas) {
+    public void setRespuestas(ArrayList<String> respuestas) {
         this.respuestas = respuestas;
     }
+
+   
     
     
+
+   
    
 
 }
