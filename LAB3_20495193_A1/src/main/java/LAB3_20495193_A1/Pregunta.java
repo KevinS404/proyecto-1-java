@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 //se genera la clase Pregunta que hereda la clase Stack
 public class Pregunta extends Stack{
-    static private int idPregunta = 0;
+    static private int idPregunta = 5;
     static private int cantidadRespuestas;
     private String etiquetas[];
     private String titulo;
@@ -15,7 +15,7 @@ public class Pregunta extends Stack{
     private int recompensa;
     //cosntructor
     public Pregunta(int idPregunta, int respuestas, String[] etiquetas, String titulo, String autor, String estado, int recompensa) {
-        Pregunta.idPregunta = idPregunta + 1;
+        Pregunta.idPregunta ++;
         Pregunta.cantidadRespuestas = 0;
         this.etiquetas = etiquetas;
         this.titulo = titulo;
@@ -40,10 +40,6 @@ public class Pregunta extends Stack{
 
     public void setCantidadRespuestas(int cantidadRespuestas) {
         Pregunta.cantidadRespuestas = cantidadRespuestas;
-    }
-
-    public String[] getEtiquetas() {
-        return etiquetas;
     }
 
     public void setEtiquetas(String[] etiquetas) {
@@ -92,9 +88,7 @@ public class Pregunta extends Stack{
     
     
     public void ask(){
-        //Pregunta 
-        
-        
+       
     }
     public void reward(){
         

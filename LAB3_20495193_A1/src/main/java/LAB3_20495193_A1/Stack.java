@@ -4,14 +4,24 @@ import java.util.ArrayList;
 
 //se genera la clase Stack que sera el nucleo de todos los datos del programa
 public class Stack {
-    ArrayList<String> usuarios = new ArrayList<>();
-    ArrayList<String> contrasenas = new ArrayList<>();
-    ArrayList<String> preguntas= new ArrayList<>();
-    ArrayList<String> respuestas = new ArrayList<>();
+    private ArrayList<String> usuarios = new ArrayList<>();
+    private ArrayList<String> contrasenas = new ArrayList<>();
+    private ArrayList<String> preguntas= new ArrayList<>();
+    private ArrayList<String> respuestas = new ArrayList<>();
+    private ArrayList<String> etiquetas = new ArrayList<>();
     //constructor
+
     public Stack() {
+        this.usuarios = new ArrayList<>();
+        this.contrasenas = new ArrayList<>();
+        this.preguntas = new ArrayList<>();
+        this.respuestas = new ArrayList<>();
+        this.etiquetas = new ArrayList<>();
+         
     }
+    
     //getters y setters de la clase Stack
+
     public ArrayList<String> getUsuarios() {
         return usuarios;
     }
@@ -44,11 +54,15 @@ public class Stack {
         this.respuestas = respuestas;
     }
 
-   
-    
-    
+    public ArrayList<String> getEtiquetas() {
+        return etiquetas;
+    }
 
+    public void setEtiquetas(ArrayList<String> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+    
    
-   
-
 }
+
+   
