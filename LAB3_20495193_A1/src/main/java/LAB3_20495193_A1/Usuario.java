@@ -1,22 +1,40 @@
 package LAB3_20495193_A1;
 
-//Se genera una clase Usuario con 3 atributos esenciales para el programa
 
+
+import java.util.ArrayList;
 import java.util.Scanner;
-//se genera la clase Usuario 
+/**
+ * Se genera una clase llamada Usuario con 3 atributos refiriendose al nombre,
+ * contraseña y reputacion de este.
+ * @author Kevin Silva
+ */
 public class Usuario{
     private String nombre;
     private String contrasena;
     private int reputacion;
     
-    //constructor
+    /**
+     * Constructor de usuario, se utiliza para generar ejemplos de la estructura
+     * que debe tener un usuario.
+     * @param nombre
+     * @param contrasena
+     * @param reputacion 
+     */
     
     public Usuario(String nombre, String contrasena, int reputacion) {
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.reputacion = reputacion;
     }
-
+    /**
+     * Constructor de asistencia para los metodos de register y login, tiene como fin
+     * que el usuario que este llamando a este metodo ingrese sus datos y dependiendo
+     * del n con el que fue llamado, este metodo llamara a otro metodo correspondiente
+     * mediante un if.
+     * @param stackPrincipal
+     * @param n 
+     */
     public Usuario(Stack stackPrincipal, int n) {
         //dentro del constructor tenemos 2 condicionales, si el numero inicial es 1
         //entonces ejecutaremos el proceso que tiene que ver con login
@@ -83,12 +101,20 @@ public class Usuario{
         this.reputacion = reputacion;
     }
     
-    //metodo para logear que recibe como entrada el stack, un nombre y una contraseña
-    public int Login(Stack stackPrincipal,String nombreInicio, String contrasenaInicio){
+    /** 
+     * Metodo mediante el cual un usuario ingresa a las demas opciones que ofrece
+     * el programa mediante la verificacion de sus credenciales
+     * @param stackPrincipal
+     * @param user
+     * @return numero para saber si el logeo fue exitoso y darle acceso al usuario
+     * o los datos fueron erroneos y el usuario no tiene acceso al sistema
+     */
+    public int Login(Stack stackPrincipal,Usuario user){
         //almacenamos en unas listas auxiliares todos los usuarios y contraseñas que se tienen hasta el momento
         int verificador = 1;
         for(int i = 0; i < stackPrincipal.getUsuarios().size();i++){
-            if(nombreInicio.equals(stackPrincipal.getUsuarios().get(i).getNombre()) && contrasenaInicio.equals(stackPrincipal.getUsuarios().get(i).getContrasena())){
+            if(user.getNombre().equals(stackPrincipal.getUsuarios().get(i).getNombre()) && user.getContrasena().equals(stackPrincipal.getUsuarios().get(i).getContrasena())){
+                user = stackPrincipal.getUsuarios().get(i);
                 verificador = 0;
            }
         }
@@ -97,9 +123,7 @@ public class Usuario{
             return 1;
         }
         else if(verificador == 0) {
-            this.nombre = nombreInicio;
-            this.contrasena = contrasenaInicio;
-            System.out.println("Usuario logeado: "+ nombreInicio);
+            System.out.println("Usuario logeado: " + user.getNombre());
             return 0;
         }
         return 0;
@@ -109,7 +133,15 @@ public class Usuario{
         return cambiarOpcion;
         
     }
-    //meotodo que registra un usuario si es que este no existe ya en el stack
+   /**
+    * Metodo que registrara a un usuario si es que este ya no esta registrado en
+    * el stack, el metodo verificara que el usuario no exista, si este es el caso
+    * entonces añadira el usuario a la lista de usuarios del stack.
+    * @param stackPrincipal
+    * @param user
+    * @param password
+    * @return 0
+    */
    public int register(Stack stackPrincipal,String user, String password){
        //variable auxiliar para retornar si es que el usuario fue registrado o no
         int verificador = 1;
@@ -141,14 +173,17 @@ public class Usuario{
     }
        public void reward(Stack stack,Usuario user){
         Pregunta eleccion = stack.mostrarPreguntas(stack);
-        int recompensa;
+        int recompensa,diferencia;
         int repUsuario = user.getReputacion();
         System.out.println("usted tiene actualmente una reputacion de: " + repUsuario);
         System.out.println("Ingrese la cantidad de puntos de reputacion que premiara:");
         Scanner aux = new Scanner(System.in);
         recompensa = aux.nextInt();
+       
         if (recompensa <= user.getReputacion()){
             eleccion.setRecompensa(recompensa);
+            diferencia =user.getReputacion() - recompensa;
+            user.setReputacion(diferencia);
             System.out.println("\nRecompensa otorgada.\n");
             System.out.println("Escoja su opcion: \n" +
                             "1. Agregar nueva pregunta\n" +
@@ -168,5 +203,109 @@ public class Usuario{
                             "5. Cerrar sesion\n" +
                             "6. Salir del programa"); 
         }
-    }       
+    }  
+    /**
+     * Metodo para aceptar la respuesta a una de las preguntas del usuario
+     * como resultado se cierra la pregunta y el autor de la respuesta 
+     * se lleva la recompensa que tenga la pregunta acumulada hasta ese momento
+     * @param stack
+     * @param user 
+     */
+    public void accept(Stack stack, Usuario user){
+        /**
+         * Primero se genera un ArrayList de pregunta para almacenar las futuras
+         * preguntas disponibles del usuario que esten aun abiertas, si es que
+         * esta pregunta tiene 0 respuestas, se le notificara al usuario, en cambio,
+         * si la pregunta tiene respuestas estas se le mostraran al usuario
+         */
+        ArrayList<Pregunta> preguntasDisponibles = new ArrayList<>();
+        int j = 1;//variable auxiliar para mostrar al usuario el numero de la pregunta
+        for(int i = 0; i < stack.getPreguntas().size();i++){
+            //si la pregunta esta abierta entonces agregamos a preguntasDisponibles
+            if("abierta".equals(stack.getPreguntas().get(i).getEstado()) && user.getNombre().equals(stack.getPreguntas().get(i).getAutor())){
+                preguntasDisponibles.add(stack.getPreguntas().get(i));
+                System.out.println("Pregunta" + " "+ j + ": "+ stack.getPreguntas().get(i).getTitulo()); //se le muestra al usuario la pregunta
+                //caso en que la pregunta tenga 0 respuestas
+                if(stack.getPreguntas().get(i).getCantidadRespuestas() == 0){
+                    System.out.println("Aun no hay respuestas para esta pregunta.");
+                }
+                //este es el caso de que la pregunta si tenga respuestas
+                else{
+                    for(int k = 0; k < stack.getPreguntas().get(i).getCantidadRespuestas();i++){
+                        if(stack.getRespuestas().get(i).getIdPregunta() == stack.getPreguntas().get(i).getIdPregunta()){
+                            System.out.println("Respuesta de: " + stack.getRespuestas().get(i).getAutor());
+                            System.out.println("Contenido: " + stack.getRespuestas().get(i).getContenido());
+                        }   
+                    }
+                }
+                j++;
+            }
+        }
+        /**
+         * Ahora queda el usuario eliga una respuesta para recompensar, si es que la lista de preguntas disponibles
+         * no esta vacia entonces se le pedira al usuario que eliga una pregunta, si esta pregunta tiene 0 respuestas
+         * entonces se le notificara al usuario que nadie ha respondido esta pregunta, si este no es el caso entonces
+         * se le mostraran al usuario todas las respuestas disponibles para aceptar
+         */
+        //caso en que no hayan preguntas disponibles para elegir
+        if(preguntasDisponibles.isEmpty()){
+            System.out.println("No tiene preguntas disponibles para realizar esta accion");
+        }
+        //caso en el que hayan al menos una pregunta disponible
+        else if(preguntasDisponibles.size() >= 1){
+            int eleccion;
+            System.out.println("Escriba el numero de la pregunta a elegir: ");
+            Scanner aux = new Scanner(System.in);
+            eleccion = aux.nextInt();
+            Pregunta seleccion = preguntasDisponibles.get(eleccion-1);
+            //si es que la pregunta no tiene respuestas, se le notificara al usuario
+            if(seleccion.getCantidadRespuestas() == 0){
+                System.out.println("Lo sentimos, esta pregunta no tiene respuestas aun");
+            }
+            //si es que la pregunta tiene respuestas, entonces le mostraremos todas las respuestas de la pregunta
+            else if (seleccion.getCantidadRespuestas() >= 1){
+                int aceptada;//variable auxiliar para almacenar la opcion 
+                ArrayList<Respuesta> disponibles = new ArrayList<>();
+                j = 1; //devolvemos esta variable a 1 para repetir un proceso similiar con las respuestas
+                int id = seleccion.getIdPregunta();
+                for(int i = 0;i < seleccion.getCantidadRespuestas();i++){
+                    if(stack.getRespuestas().get(i).getIdPregunta() == id){
+                        System.out.println("opcion numero: "+j);
+                        System.out.println("Respuesta de: " + stack.getRespuestas().get(i).getAutor());
+                        System.out.println("Contenido: " +stack.getRespuestas().get(i).getContenido());
+                        disponibles.add(stack.getRespuestas().get(i));
+                        j = j +1;
+                    }
+                }
+            /**
+             * hacemos que el usuario escoja una respuesta de las mostradas por pantalla
+             * entonces haremos que esta respuesta sea guardada en una variable de tipo Respuesta,
+             * tambien guardamos la recompensa acumulada de la pregunta en una variable y vaciamos
+             * este atributo de la pregunta, para despues asignar esta recompensa al autor de la pregunta
+             * que sera buscado mediante un ciclo,y finalmente dejar el estado de la pregunta como "cerrada"
+             */
+                System.out.println("Escoja la respuesta que desea aceptar: ");
+                Scanner aux2 = new Scanner(System.in);
+                aceptada = aux2.nextInt();
+                Respuesta seleccionada = disponibles.get(aceptada-1);//variable para guardar la respuesta
+                int recompensa = seleccion.getRecompensa();//variable para guardar la recompensa de la pregunta
+                String usuario = seleccionada.getAutor();
+                for (int i = 0;i < stack.getUsuarios().size();i++){
+                    if(usuario == null ? stack.getUsuarios().get(i).getNombre() == null : usuario.equals(stack.getUsuarios().get(i).getNombre())){
+                        int suma = stack.getUsuarios().get(i).getReputacion() + recompensa;
+                        stack.getUsuarios().get(i).setReputacion(suma);
+                        seleccion.setRecompensa(0);
+                        seleccion.setEstado("cerrada");
+                    }
+                }
+            }
+        }
+     System.out.println("\nOpciones disponibles: \n" +
+                        "1. Agregar nueva pregunta\n" +
+                        "2. Responder pregunta\n" +
+                        "3. Dar recompensa\n" +
+                        "4. Aceptar respuesta\n" +
+                        "5. Cerrar sesion\n" +
+                        "6. Salir del programa");    
+    }  
 }

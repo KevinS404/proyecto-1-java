@@ -59,8 +59,8 @@ public class Stack {
         Pregunta preguntaEjemplo = new Pregunta(id,respuestas,etiquetas, titulo, contenido , fechaDePublicacion, autor, estado, recompensa);
         preguntas.add(preguntaEjemplo);
     }
-    public void agregarRespuesta(int idRespuesta, String autor, String fecha, String contenido){
-        Respuesta respuestaEjemplo = new Respuesta(idRespuesta,autor,fecha,contenido);
+    public void agregarRespuesta(int idPregunta,int idRespuesta, String autor, String fecha, String contenido){
+        Respuesta respuestaEjemplo = new Respuesta(idPregunta,idRespuesta,autor,fecha,contenido);
         respuestas.add(respuestaEjemplo);
     }
     public void agregarEtiqueta(String nombreEtiqueta, String descripcion){
@@ -78,7 +78,8 @@ public class Stack {
       for(int i = 0; i < preguntas.size();i++){
           if("abierta".equals(preguntas.get(i).getEstado())){
             preguntasDisponibles.add(preguntas.get(i));
-            System.out.println("Pregunta" + " "+ j + ": "+ preguntas.get(i).getTitulo()+ ". Publicada por: " +  preguntas.get(i).getAutor());
+            System.out.println("Pregunta" + " "+ j + ": "+ preguntas.get(i).getTitulo()+ ". Publicada por: " +  preguntas.get(i).getAutor()+
+                                ". Etiquetas: "+ preguntas.get(i).getEtiquetas());
             System.out.println("Su contenido es: ");
             System.out.println(preguntas.get(i).getContenido()+"\n");
             j++;
@@ -91,11 +92,38 @@ public class Stack {
       return preguntasDisponibles.get(eleccion-1);
       
   }
-    /*
-    public void mostrarRespuestas(){
-        
-    }
-    */
+  public Pregunta mostrarMisPreguntas(Stack stack, Usuario user){
+      ArrayList<Pregunta> preguntas = stack.getPreguntas();
+      ArrayList<Respuesta> respuestas = stack.getRespuestas();
+      ArrayList<Pregunta> preguntasDisponibles = new ArrayList<>();
+      System.out.println("Preguntas disponibles para responder o recompensar: \n");
+      int j = 1;
+      
+      for(int i = 0; i < preguntas.size();i++){
+          if("abierta".equals(preguntas.get(i).getEstado()) && user.getNombre().equals(preguntas.get(i).getAutor())){
+              preguntasDisponibles.add(preguntas.get(i));
+              System.out.println("Pregunta" + " "+ j + ": "+ preguntas.get(i).getTitulo());
+                if(preguntas.get(i).getCantidadRespuestas() == 0){
+                    System.out.println("Aun no hay respuestas para esta pregunta.");
+                }
+                else{
+                    for(int k = 0; k < preguntas.get(i).getCantidadRespuestas();i++){
+                        if(respuestas.get(i).getIdPregunta() == preguntas.get(i).getIdPregunta()){
+                            System.out.println("Respuesta de: " + respuestas.get(i).getAutor());
+                            System.out.println("Contenido: " +respuestas.get(i).getContenido());
+                        }   
+                    }
+                }
+                j++;
+            }
+        }
+      int eleccion;
+      System.out.println("Escriba el numero de la pregunta a elegir: ");
+      Scanner aux = new Scanner(System.in);
+      eleccion = aux.nextInt();
+      return preguntasDisponibles.get(eleccion-1);
+  }
+     
 }
     
    

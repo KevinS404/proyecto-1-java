@@ -29,22 +29,24 @@ public class Main {
         ArrayList<String> etiqueta4 = new ArrayList<>();
         etiqueta1.add("c++");
         //5 preguntas de ejemplo
+        
         stackPrincipal.agregarPregunta(1,2,etiqueta1, "titulo1", "contenido1" , "fechaDePublicacion1", "usuario1", "cerrada", 0);
         stackPrincipal.agregarPregunta(2,0,etiqueta2, "titulo2", "contenido2" , "fechaDePublicacion2", "usuario2", "abierta", 15);
         stackPrincipal.agregarPregunta(3,5,etiqueta3, "titulo3", "contenido3" , "fechaDePublicacion3", "usuario3", "cerrada", 0);
         stackPrincipal.agregarPregunta(4,1,etiqueta1, "titulo4", "contenido4" , "fechaDePublicacion4", "usuario4", "abierta", 0);
         stackPrincipal.agregarPregunta(5,6,etiqueta4, "titulo5", "contenido5" , "fechaDePublicacion4", "usuario1", "cerrada", 0);
+
         //10 respuestas de ejemplo
-        stackPrincipal.agregarRespuesta(1, "usuario1", "27/07/2020", "contenido1");
-        stackPrincipal.agregarRespuesta(2, "usuario1", "07/01/2021", "contenido2");
-        stackPrincipal.agregarRespuesta(1, "usuario2", "10/07/2020", "contenido3");
-        stackPrincipal.agregarRespuesta(1, "usuario2", "27/03/2020", "contenido4");
-        stackPrincipal.agregarRespuesta(2, "usuario2", "02/01/2021", "contenido5");
-        stackPrincipal.agregarRespuesta(2, "usuario3", "30/11/2020", "contenido6");
-        stackPrincipal.agregarRespuesta(3, "usuario3", "20/09/2020", "contenido7");
-        stackPrincipal.agregarRespuesta(4, "usuario3", "12/12/2020", "contenido8");
-        stackPrincipal.agregarRespuesta(5, "usuario4", "06/07/2020", "contenido9");
-        stackPrincipal.agregarRespuesta(5, "usuario4", "15/01/2020", "contenido10");
+        stackPrincipal.agregarRespuesta(1,1, "usuario1", "27/07/2020", "contenido1");
+        stackPrincipal.agregarRespuesta(2,2, "usuario1", "07/01/2021", "contenido2");
+        stackPrincipal.agregarRespuesta(3,1, "usuario2", "10/07/2020", "contenido3");
+        stackPrincipal.agregarRespuesta(2,1, "usuario2", "27/03/2020", "contenido4");
+        stackPrincipal.agregarRespuesta(1,2, "usuario2", "02/01/2021", "contenido5");
+        stackPrincipal.agregarRespuesta(3,2, "usuario3", "30/11/2020", "contenido6");
+        stackPrincipal.agregarRespuesta(2,3, "usuario3", "20/09/2020", "contenido7");
+        stackPrincipal.agregarRespuesta(2,4, "usuario3", "12/12/2020", "contenido8");
+        stackPrincipal.agregarRespuesta(4,5, "usuario4", "06/07/2020", "contenido9");
+        stackPrincipal.agregarRespuesta(5,5, "usuario4", "15/01/2020", "contenido10");
  
         int verificador = 1;
         while(verificador == 1){
@@ -60,7 +62,7 @@ public class Main {
             //si el usuario ingresa la opcion 1 entonces se le pedira que inicie sesion
             if(primeraOpcion == 1){
                 Usuario user = new Usuario(stackPrincipal,1);
-                int comprobante = user.Login(stackPrincipal,user.getNombre(),user.getContrasena());
+                int comprobante = user.Login(stackPrincipal,user);
                 if(comprobante == 0){
                     //una vez iniciada la sesion correctamente entonces se le despliega el menu
                     //para que elija una accion.
@@ -81,7 +83,7 @@ public class Main {
                         switch (opcion2) {
                             //en el caso de elegir la primera opcion haremos que el usuario ingrese los datos de la pregunta
                             case 1:
-                                Pregunta question = new Pregunta(stackPrincipal,user.getNombre());
+                                Pregunta question = new Pregunta(stackPrincipal,user);
                                 break;
                             //en el caso de elegir la segunda opcion haremos que el usuario responda alguna pregunta
                             case 2:
@@ -93,8 +95,7 @@ public class Main {
                                 break;
                             //en el caso de elegir la cuarta opcion ejecutaremos la funcionadlidad accept
                             case 4:
-                                System.out.println("opcion 4");
-                                //aceppt();
+                                user.accept(stackPrincipal, user);
                                 break;
                             //en el caso de elegir la quinta opcion ejecutaremos la funcionalidad logout
                             case 5:

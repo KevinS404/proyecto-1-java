@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 //la clase stack
 public class Respuesta{
+    private int idPregunta;
     private int idRespuesta;
     private String autor;
     private String fecha;
     private String contenido;
     //constructor
-    public Respuesta(int idRespuesta, String autor, String fecha, String contenido) {
+    public Respuesta(int idPregunta,int idRespuesta, String autor, String fecha, String contenido) {
+        this.idPregunta = idPregunta;
         this.idRespuesta = idRespuesta;
         this.autor = autor;
         this.fecha = fecha;
@@ -29,11 +31,24 @@ public class Respuesta{
         //en el metodo ask se genera la pregunta mediante el ingreso por teclado
         int resultado = answer(stack,eleccion,contenido,id,user);  
     }
-    
     //getters y setters de la clase Respuesta
-    public int getidRespuesta() {
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {    
+        this.idPregunta = idPregunta;
+    }
+
+    public int getIdRespuesta() {
         return idRespuesta;
     }
+
+   
+    public void setIdRespuesta(int idRespuesta) {    
+        this.idRespuesta = idRespuesta;
+    }
+
 
     public void setidRespuesta(int idRespuesta) {
         this.idRespuesta = idRespuesta;
@@ -63,19 +78,20 @@ public class Respuesta{
         this.contenido = contenido;
     }
     public int answer(Stack stack, Pregunta eleccion,String contenido,int id,Usuario user){
-        this.idRespuesta = id;
-        eleccion.setCantidadRespuestas(id);
+        this.idPregunta = eleccion.getIdPregunta();
+        this.idRespuesta = idRespuesta;
+        eleccion.setCantidadRespuestas(idRespuesta);
         System.out.println("Ingrese el contenido de la respuesta a la pregunta: ");
         Scanner aux = new Scanner(System.in);
         contenido = aux.nextLine();
         
         this.autor = user.getNombre();
-        
+ 
         String fechaDePublicacion;
         System.out.println("Ingrese la fecha de publicacion con formato dd/mm/aaaa: ");
         Scanner aux2 = new Scanner(System.in);
         fechaDePublicacion = aux2.nextLine();
-        stack.agregarRespuesta(id, user.getNombre(), fechaDePublicacion, contenido);
+        stack.agregarRespuesta(idPregunta,id, user.getNombre(), fechaDePublicacion, contenido);
         System.out.println("\nRespuesta publicada.\n");
         System.out.println("Escoja su opcion: \n" +
                         "1. Agregar nueva pregunta\n" +
@@ -86,10 +102,5 @@ public class Respuesta{
                         "6. Salir del programa");
         
         return 1;
-    }
-    public void accept(){
-        
-    }
-    
-    
+    } 
 }
