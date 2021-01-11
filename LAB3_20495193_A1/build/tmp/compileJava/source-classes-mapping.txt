@@ -1,5 +1,3 @@
-LAB3_20495193_A1/Etiqueta.java
- LAB3_20495193_A1.Etiqueta
 LAB3_20495193_A1/Stack.java
  LAB3_20495193_A1.Stack
 LAB3_20495193_A1/Usuario.java
@@ -8,5 +6,7 @@ LAB3_20495193_A1/Main.java
  LAB3_20495193_A1.Main
 LAB3_20495193_A1/Pregunta.java
  LAB3_20495193_A1.Pregunta
+LAB3_20495193_A1/Etiqueta.java
+ LAB3_20495193_A1.Etiqueta
 LAB3_20495193_A1/Respuesta.java
  LAB3_20495193_A1.Respuesta

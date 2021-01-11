@@ -1,81 +1,33 @@
 package LAB3_20495193_A1;
 
-
-
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * Se genera una clase llamada Usuario con 3 atributos refiriendose al nombre,
- * contraseña y reputacion de este.
+ * contraseña y reputacion de este. Esta clase tiene su respectivo constructor, getters
+ * y setters ademas de poseer los metodos correspondientes a register,login,logout,reward
+ * y accept.
  * @author Kevin Silva
  */
 public class Usuario{
     private String nombre;
     private String contrasena;
-    private int reputacion;
+    private int reputacion = 500; //por temas practicos todos inician con 500 puntos
     
     /**
-     * Constructor de usuario, se utiliza para generar ejemplos de la estructura
+     * Constructor de usuario, se utiliza para generar variables de la estructura
      * que debe tener un usuario.
      * @param nombre
      * @param contrasena
      * @param reputacion 
      */
-    
+    //Constructor de usuario
     public Usuario(String nombre, String contrasena, int reputacion) {
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.reputacion = reputacion;
     }
-    /**
-     * Constructor de asistencia para los metodos de register y login, tiene como fin
-     * que el usuario que este llamando a este metodo ingrese sus datos y dependiendo
-     * del n con el que fue llamado, este metodo llamara a otro metodo correspondiente
-     * mediante un if.
-     * @param stackPrincipal
-     * @param n 
-     */
-    public Usuario(Stack stackPrincipal, int n) {
-        //dentro del constructor tenemos 2 condicionales, si el numero inicial es 1
-        //entonces ejecutaremos el proceso que tiene que ver con login
-        if(n == 1){
-            //le indicamos al usuario que esta en el proceso de logeo
-            System.out.println("PROCESO DE LOGEO\n");
-            String nombreInicio;
-            //le pedimos que ingrese su usuario por pantalla
-            System.out.println("Ingrese su usuario: ");
-            Scanner opcion = new Scanner(System.in);
-            nombreInicio = opcion.nextLine();
-            this.nombre = nombreInicio;
-            //hacemos lo mismo para la contraseña del usuario
-            String contrasenaInicio;
-            System.out.println("Ingrese su contrasena: ");
-            Scanner password = new Scanner(System.in);
-            contrasenaInicio = password.nextLine();
-            this.contrasena = contrasenaInicio;
-        }
-        //si el usuario elige la segunda opcion ejecutamos el proceso
-        //de registro
-        else if(n == 2){
-            //se le indica al usuario que esta en el proceso de registro
-            System.out.println("\nPROCESO DE REGISTRO\n");
-            String nombreRegistro;
-            //le pedimos que ingrese el nombre de usuario que desea
-            System.out.println("Ingrese el nombre de usuario con el que se registrara:");
-            Scanner opcion = new Scanner(System.in);
-            nombreRegistro = opcion.nextLine();
-            System.out.println("\n");
-            //hacemos lo mismo para la contraseña
-            String contrasenaRegistro;
-            System.out.println("Ingrese su contrasena: ");
-            Scanner password = new Scanner(System.in);
-            contrasenaRegistro = password.nextLine();
-            System.out.println("\n");
-            //una vez que tenemos los datos esenciales, ejecutamos el metodo register que
-            //retornara una variable que usaremos para ver si efectivamente se logro el proceso
-            int resultado = register(stackPrincipal,nombreRegistro,contrasenaRegistro);
-        }
-    }
+    
     //serie de getters y setters para cada elemento de la clase Usuario
     public String getNombre() {
         return nombre;
@@ -110,7 +62,27 @@ public class Usuario{
      * o los datos fueron erroneos y el usuario no tiene acceso al sistema
      */
     public int Login(Stack stackPrincipal,Usuario user){
-        //almacenamos en unas listas auxiliares todos los usuarios y contraseñas que se tienen hasta el momento
+        //le indicamos al usuario que esta en el proceso de logeo
+        System.out.println("PROCESO DE LOGEO\n");
+        String nombreInicio;
+        //le pedimos que ingrese su usuario por pantalla
+        System.out.println("Ingrese su usuario: ");
+        Scanner opcion = new Scanner(System.in);
+        nombreInicio = opcion.nextLine();
+        this.nombre = nombreInicio;
+        //hacemos lo mismo para la contraseña del usuario
+        String contrasenaInicio;
+        System.out.println("Ingrese su contrasena: ");
+        Scanner password = new Scanner(System.in);
+        contrasenaInicio = password.nextLine();
+        this.contrasena = contrasenaInicio;
+        /**
+         * Una vez se tienen las variables de nombre y contrasena se genera un verificador que
+         * nos dira si es que el usuario pudo ser logeado o no. Esto se hace mediante un ciclo en
+         * el cual se itera toda la lista de usuarios buscando si el nombre y la contraseña ya se encuentra ingresado,
+         * si es que se encuentran entonces cambiamos el valor del user creado en main al usuario guardado
+         * a la vez que cambiamos el valor del verificador.
+         */
         int verificador = 1;
         for(int i = 0; i < stackPrincipal.getUsuarios().size();i++){
             if(user.getNombre().equals(stackPrincipal.getUsuarios().get(i).getNombre()) && user.getContrasena().equals(stackPrincipal.getUsuarios().get(i).getContrasena())){
@@ -118,6 +90,11 @@ public class Usuario{
                 verificador = 0;
            }
         }
+        /**
+         * Una vez listo este proceso el programa verifica que valor tiene el verificador
+         * si este tiene el valor de 1 entonces no se encontro que el usuario o la contraseña
+         * estuviera registrado por lo que se le dira que los datos no son validos
+         */
         if(verificador == 1){
             System.out.println("Datos invalidos\n");
             return 1;
@@ -128,7 +105,15 @@ public class Usuario{
         }
         return 0;
     }
+    /**
+     * Metodo que cierra la sesion de un usuario, para esto cambia la opcion que
+     * mantiene el bucle do while de main a 6 y se le indica al usuario que la sesion
+     * se esta cerrando.
+     * @param cambiarOpcion
+     * @return 
+     */
     public int logout(int cambiarOpcion){
+        System.out.println("Cerrando sesion.");
         cambiarOpcion = 6;
         return cambiarOpcion;
         
@@ -139,10 +124,23 @@ public class Usuario{
     * entonces añadira el usuario a la lista de usuarios del stack.
     * @param stackPrincipal
     * @param user
-    * @param password
     * @return 0
     */
-   public int register(Stack stackPrincipal,String user, String password){
+   public int register(Stack stackPrincipal,Usuario user){
+        //se le indica al usuario que esta en el proceso de registro
+        System.out.println("\nPROCESO DE REGISTRO\n");
+        String nombreRegistro;
+        //le pedimos que ingrese el nombre de usuario que desea
+        System.out.println("Ingrese el nombre de usuario con el que se registrara:");
+        Scanner opcion = new Scanner(System.in);
+        nombreRegistro = opcion.nextLine();
+        System.out.println("\n");
+        //hacemos lo mismo para la contraseña
+        String contrasenaRegistro;
+        System.out.println("Ingrese su contrasena: ");
+        Scanner password = new Scanner(System.in);
+        contrasenaRegistro = password.nextLine();
+        System.out.println("\n");
        //variable auxiliar para retornar si es que el usuario fue registrado o no
         int verificador = 1;
         //recorremos la lista de usuarios viendo si es que el user que desea registrarse
@@ -156,21 +154,32 @@ public class Usuario{
         //si el usuario no existe en el stack, indicamos por pantalla que el registro
         //se pudo hacer y agregamos el usuario al stack
         if(verificador == 1){
-            this.nombre = user;
-            this.contrasena = password;
+            this.nombre = nombreRegistro;
+            this.contrasena = contrasenaRegistro;
             this.reputacion = 500;
             System.out.println("REGISTRO EXITOSO!\n");
             //agregamos al usuario a la lista con una reputacion inicial de 500 puntos
-            stackPrincipal.agregarUsuario(user, contrasena, reputacion);
+            stackPrincipal.agregarUsuario(nombreRegistro, contrasenaRegistro, 500);
         }
         //si el usuario existiera le indicaremos esto al usuario por pantalla
         //y le daremos la opcion de registrarse o de iniciar sesion
         else if(verificador == 0) {
             System.out.println("Usuario ya ingresado, intente con otro nombre");
-                Usuario reIntento = new Usuario(stackPrincipal,2);
         }
         return 0;
     }
+   /**
+    * Metodo mediante el cual un usuario recompensa una pregunta, para esto almacena
+    * la pregunta mediante un metodo de la clase Stack el cual muestra las preguntas 
+    * disponibles y el usuario elige la pregunta, el metodo entonces retornara esta pregunta
+    * y empezara el proceso de premiacion en el cual se le dira al usuario cuanta reputacion tiene
+    * y cuanta quiere dar, si esta es menor que la reputacion que tiene entonces el programa le dira que no
+    * no tiene suficientes puntos. Si es que el usuario tiene los suficientes puntos,entonces se calculara la
+    * diferencia entre la reputacion actual y la que quiere premiar y se le asignara esta a la reputacion del usuario
+    * y la recompensa a la pregunta.
+    * @param stack
+    * @param user 
+    */
        public void reward(Stack stack,Usuario user){
         Pregunta eleccion = stack.mostrarPreguntas(stack);
         int recompensa,diferencia;
@@ -292,6 +301,7 @@ public class Usuario{
                 String usuario = seleccionada.getAutor();
                 for (int i = 0;i < stack.getUsuarios().size();i++){
                     if(usuario == null ? stack.getUsuarios().get(i).getNombre() == null : usuario.equals(stack.getUsuarios().get(i).getNombre())){
+                        System.out.println("Respuesta aceptada, la pregunta se marcara como cerrada");
                         int suma = stack.getUsuarios().get(i).getReputacion() + recompensa;
                         stack.getUsuarios().get(i).setReputacion(suma);
                         seleccion.setRecompensa(0);

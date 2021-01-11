@@ -2,11 +2,17 @@
 package LAB3_20495193_A1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
-//se genera la clase Pregunta
+/**
+ * Se crea la clase Pregunta la cual tiene los atributos necesarios 
+ * para la implementacion de este programa,posee constructor,getters y setters.
+ * Por otro lado posee metodos como el segundo constructor de Pregunta el cual
+ * genera una clase de este tipo sin la necesidad de entregar los parametros 
+ * del constructor normal, y en cambio se relaciona directamente con el metodo ask
+ * el cual pide todos los datos necesarios para formar una pregunta.
+ * @author Kevin Silva
+ */
 public class Pregunta {
     private static int idIncremental = 0;
     private int idPregunta;
@@ -20,7 +26,7 @@ public class Pregunta {
     private int recompensa;
 
 
-    //constructor con id unico
+    //constructor con id incremental
     public Pregunta(int id, int respuesta,ArrayList<String> etiquetas, String titulo, String contenido, String fechaDePublicacion, String autor, String estado, int recompensa) {
         idIncremental++;
         this.idPregunta = idIncremental;
@@ -32,9 +38,8 @@ public class Pregunta {
         this.estado = estado;
         this.recompensa = recompensa;
     }
-
+    //Constructor auxiliar del metodo stack del cual se saca el
     public Pregunta(Stack stack, Usuario user) {
-        System.out.println(idPregunta);
         int resultado = ask(stack,user);
     }
     //getters y setters para la clase Pregunta
@@ -111,8 +116,21 @@ public class Pregunta {
     public void setRecompensa(int recompensa) {
         this.recompensa = recompensa;
     }
-    
-    
+    /**
+     * metodo que permite a un usuario agregar una pregunta, en este caso se
+     * le pedira al usuario que primero ingrese el titulo y contenido de la pregunta
+     * seguido se le dara la opcion de elegir si quiere agregar etiquetas o no, para esto
+     * se le dan 3 opciones que se repetiran siempre y cuando no elija la tercera.
+     * La primera opcion le mostrara la lista de la cual tendra que una etiqueta y 
+     * escribir el nombre de la etiqueta que prefiera, la opcion 2 es que
+     * agregue una etiqueta propia con una descripcion de esta y finalmente la tercera 
+     * opcion es para no añadir ninguna etiqueta. Listo este proceso entonces se le pedira
+     * que ingrese la fecha de publicacion de la pregunta para luego añadir la pregunta
+     * a la lista de preguntas y mostrar por pantalla que la pregunta ya fue publicada.
+     * @param stack
+     * @param user
+     * @return 
+     */
     public int ask (Stack stack, Usuario user){
         System.out.println("Ingrese el titulo de la pregunta: ");
         Scanner aux1 = new Scanner(System.in);
@@ -133,7 +151,7 @@ public class Pregunta {
             opcion = aux.nextInt();
             if(opcion == 1){
                 System.out.println(stack.getEtiquetas());
-                System.out.println("\nEscriba su eleccion: ");
+                System.out.println("\nEscriba el nombresu eleccion: ");
                 Scanner aux3 = new Scanner(System.in);
                 etiqueta = aux3.nextLine();
                 etiquetaP.add(etiqueta);

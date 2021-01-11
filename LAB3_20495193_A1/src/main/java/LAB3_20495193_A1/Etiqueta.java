@@ -1,10 +1,10 @@
 
 package LAB3_20495193_A1;
-
-//se genera la clase Etiqueta
-
-import java.util.ArrayList;
-
+/**
+ * Se crea una clase Etiqueta la cual tiene como atributos el nombre
+ * de la etiqueta y la descripcion de la misma
+ * @author Kevin Silva
+ */
 public class Etiqueta{
     private String nombre;
     private String descripcion;
